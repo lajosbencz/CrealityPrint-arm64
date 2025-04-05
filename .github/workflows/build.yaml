@@ -1,9 +1,9 @@
 name: Build for ARM
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  release:
+    types: [published]
+permissions:
+  contents: write
 jobs:
   build:
     runs-on: ubuntu-24.04-arm
@@ -21,9 +21,8 @@ jobs:
             && ./BuildLinux.sh -u \
             && ./BuildLinux.sh -dsir
 
-      - name: Archive
-        uses: actions/upload-artifact@v4
+      - name: Upload Release Assets
+        uses: softprops/action-gh-release@v2
         with:
-            name: AppImage
-            path: |
-                **/*.AppImage
+          files: |
+            **/*.AppImage
