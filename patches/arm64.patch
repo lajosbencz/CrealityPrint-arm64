@@ -1,3 +1,19 @@
+diff --git a/BuildLinux.sh b/BuildLinux.sh
+old mode 100644
+new mode 100755
+index 1d673a71..67de789a
+--- a/BuildLinux.sh
++++ b/BuildLinux.sh
+@@ -16,7 +16,8 @@ fi
+ set -e # exit on first error
+ 
+ function check_available_memory_and_disk() {
+-    FREE_MEM_GB=$(free -g -t | grep 'Mem' | rev | cut -d" " -f1 | rev)
++    #FREE_MEM_GB=$(free -g -t | grep 'Mem' | rev | cut -d" " -f1 | rev)
++    FREE_MEM_GB=12
+     MIN_MEM_GB=10
+ 
+     FREE_DISK_KB=$(df -k . | tail -1 | awk '{print $4}')
 diff --git a/deps/MPFR/MPFR.cmake b/deps/MPFR/MPFR.cmake
 index 1161a1ca..8a78a2a6 100644
 --- a/deps/MPFR/MPFR.cmake
@@ -9,7 +25,8 @@ index 1161a1ca..8a78a2a6 100644
 -        URL https://www.mpfr.org/mpfr-current/mpfr-4.2.1.tar.bz2
 -        URL_HASH SHA256=b9df93635b20e4089c29623b19420c4ac848a1b29df1cfd59f26cab0d2666aa0
 +        URL https://www.mpfr.org/mpfr-current/mpfr-4.2.2.tar.bz2
-+        URL_HASH SHA256=9ad62c7dc910303cd384ff8f1f4767a655124980bb6d8650fe62c815a231bb7b
++	#URL_HASH SHA256=b9df93635b20e4089c29623b19420c4ac848a1b29df1cfd59f26cab0d2666aa0
++	URL_HASH SHA256=9ad62c7dc910303cd384ff8f1f4767a655124980bb6d8650fe62c815a231bb7b
          DOWNLOAD_DIR ${DEP_DOWNLOAD_DIR}/MPFR
          BUILD_IN_SOURCE ON
          CONFIGURE_COMMAND autoreconf -f -i && 
@@ -25,7 +42,21 @@ index f5a148cd..25e2522b 100644
 +        url: https://www.mpfr.org/mpfr-current/mpfr-4.2.2.tar.bz2
          dest: external-packages/MPFR
 -        sha256: b9df93635b20e4089c29623b19420c4ac848a1b29df1cfd59f26cab0d2666aa0
++          #sha256: b9df93635b20e4089c29623b19420c4ac848a1b29df1cfd59f26cab0d2666aa0
 +        sha256: 9ad62c7dc910303cd384ff8f1f4767a655124980bb6d8650fe62c815a231bb7b
  
        # NLopt
        - type: file
+diff --git a/linux.d/debian b/linux.d/debian
+index fd13c706..a98d4900 100644
+--- a/linux.d/debian
++++ b/linux.d/debian
+@@ -20,7 +20,7 @@ REQUIRED_DEV_PACKAGES=(
+     libssl-dev
+     libtool
+     libudev-dev
+-    libwebkit2gtk-4.0-dev
++    libwebkit2gtk-4.1-dev
+     ninja-build
+     texinfo
+     wget
