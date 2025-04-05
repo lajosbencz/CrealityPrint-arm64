@@ -19,7 +19,8 @@ jobs:
         run: |
             cd upstream \
             && ./BuildLinux.sh -u \
-            && ./BuildLinux.sh -dsir
+            && ./BuildLinux.sh -dsir \
+            && ./BuildLinux.sh -i
 
       - name: Upload Release Assets
         uses: softprops/action-gh-release@v2
